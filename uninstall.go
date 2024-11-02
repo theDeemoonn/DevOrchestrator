@@ -1,4 +1,3 @@
-// uninstall.go
 package main
 
 import (

@@ -1,4 +1,3 @@
-// types.go
 package main
 
 import (

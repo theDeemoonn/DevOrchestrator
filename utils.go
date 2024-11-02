@@ -1,4 +1,3 @@
-// utils.go
 package main
 
 import (
@@ -14,29 +13,6 @@ import (
 
 // Карта специальных команд установки
 var specialInstallCommands = map[string]map[string][]string{
-	"windows": {
-		"code": {
-			"powershell -Command \"choco install vscode -y\"",
-		},
-		"sublime-text": {
-			"powershell -Command \"choco install sublimetext3 -y\"",
-		},
-		"goland": {
-			"powershell -Command \"choco install goland -y\"",
-		},
-		"webstorm": {
-			"powershell -Command \"choco install webstorm -y\"",
-		},
-		"pycharm": {
-			"powershell -Command \"choco install pycharm-community -y\"",
-		},
-		"intellij-idea": {
-			"powershell -Command \"choco install intellijidea-community -y\"",
-		},
-		"docker": {
-			"powershell -Command \"choco install docker-desktop -y\"",
-		},
-	},
 	"linux": {
 		"code": {
 			"wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg",
@@ -52,6 +28,9 @@ var specialInstallCommands = map[string]map[string][]string{
 			"echo \"deb https://download.sublimetext.com/ apt/stable/\" | sudo tee /etc/apt/sources.list.d/sublime-text.list",
 			"sudo apt update",
 			"sudo apt install -y sublime-text",
+		},
+		"postman": {
+			"sudo snap install postman",
 		},
 		"goland": {
 			"sudo snap install goland --classic",
@@ -319,6 +298,7 @@ func executeCommand(osType, command, program string) error {
 	case "darwin":
 		fullCommand = fmt.Sprintf("%s %s %s", pm, pmCommand, packageName)
 	default:
+		// Исправляем ошибку с дублированием apt-get
 		fullCommand = fmt.Sprintf("sudo apt %s %s", pmCommand, packageName)
 	}
 

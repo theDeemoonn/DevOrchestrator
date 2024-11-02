@@ -1,4 +1,3 @@
-// update.go
 package main
 
 import (
